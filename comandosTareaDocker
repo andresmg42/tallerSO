@@ -1,0 +1,35 @@
+
+-------para el servidor
+docker pull postgres:15-bookworn
+
+docker network create redtarea
+
+docker run --name pg_server --network redtarea -e POSTGRES_PASSWORD=12345 -e POSTGRES_USER=andres -e POSTGRES_DB=tarea_db -e PGDATA=/var/lib/postgresql/data -v pg_db:/var/lib/postgresql/data -d postgres:15-bookworm
+
+docker exec -it pg_server bash
+
+psql -U andres --db tarea_db --password
+
+CREATE TABLE pg_tabla(id varchar(20), mensaje varchar(20));
+
+INSERT INTO pg_tabla values('1','hola mundo');
+
+docker connect redtarea pg_server//opcional
+
+----para el cliente
+
+docker pull postgres:16-bookworm
+
+docker run --name pg_client -e  POSTGRES_PASSWORD=12345 --network redtarea -d postgres:16-bookworm
+
+docker exec -it pg_client bash
+
+psql -h pg_server -p 5432 -U andres --db tarea_db --password
+
+select * from pg_tabla;
+
+docker container rm -f $(docker container ls -q)
+
+docker network rm redtarea 
+
+docker volume rm pg_db
