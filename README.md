@@ -9,3 +9,4 @@ INTEGRANTES:
 Andrés David Ortega - 2241885
 Trujillo Suarez Jose Daniel - 2225611
 
+LINK VIDEO: https://drive.google.com/file/d/1xX1g84_rQZm-V3gYxL70vHBKwAWYjvwE/view?usp=sharing
